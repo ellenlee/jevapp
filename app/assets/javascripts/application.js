@@ -17,13 +17,9 @@
 //= require bootstrap-sprockets
 //= require_tree .
 $(document).on("turbolinks:load", function(){
-  console.log("ready");
   var page_id = $('body').attr('id');
   console.log(page_id);
-  var target_list = "list-"+page_id.split("-")[1];
+  var target_list = "list-"+page_id;
   console.log(target_list);
   $("#"+target_list).addClass("active");
-
-
-
 });
