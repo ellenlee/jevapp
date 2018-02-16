@@ -1,0 +1,20 @@
+<h1>Post</h1>
+
+<div class="card-columns">
+  <% @posts.each do |post| %>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
+        <p class="card-text">
+          <small class="text-muted"><%= post.created_at.strftime("%F %H:%M") %></small>
+        </p>
+        <p class="card-text"><%= strip_tags(post.content).truncate(40) %></p>
+        <div class="text-right">
+          <%= link_to "Edit", edit_post_path(post), class: "card-link" %>
+          <%= link_to "Destroy", post_path(post), method: :delete, class: "card-link" %>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+</div>

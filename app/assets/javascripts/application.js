@@ -15,7 +15,11 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+//= require jquery
+//= require jquery_ujs
+//= require ckeditor/init
 //= require_tree .
+
 $(document).on("turbolinks:load", function(){
   var page_id = $('body').attr('id');
   console.log(page_id);

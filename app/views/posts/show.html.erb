@@ -1,0 +1,9 @@
+<h1><%= @post.title %></h1>
+<p><%= @post.created_at %></p>
+<%= link_to "Edit", edit_post_path(@post) %>｜
+<%= link_to "Destroy", post_path(@post), method: :delete %>
+<hr>
+
+<div class="">
+  <%= @post.content.html_safe %>
+</div>
