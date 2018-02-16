@@ -1,11 +1,14 @@
 <h1><%= @post.title %></h1>
-<p><%= @post.created_at %></p>
-<%= link_to edit_post_path(@post) do %>
+<p class="float-right">
+  <%= link_to edit_post_path(@post) do %>
   <%= icon 'fas', "edit" %>
-<% end %>
-<%= link_to post_path(@post), method: :delete do %>
+  <% end %>
+  <%= link_to post_path(@post), method: :delete do %>
   <%= icon "fas", "trash-alt" %>
-<% end %>
+  <% end %>
+</p>
+
+<p class="small text-muted"><%= @post.created_at.strftime("%F %H:%M") %> by <%= link_to @post.user.name, user_path(@post.user) %></p>
 <hr>
 
 <div class="">

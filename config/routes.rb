@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :tools
   get "/base_count", to: "tools#base_count"
   resources :posts
+  resources :users
 end

@@ -1,0 +1,7 @@
+<h2>Edit Profile</h2>
+
+<%= simple_form_for @user do |f| %>
+  <%= f.input :name %>
+  <%= f.input :email, disabled: true %>
+  <%= f.button :submit, class: "btn btn-primary" %>
+<% end %>
