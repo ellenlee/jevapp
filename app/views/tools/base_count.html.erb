@@ -5,24 +5,18 @@
 
   <div class="col-6">
     <h4>十進位</h4>
-    <div class="form-group row">
-      <label for="" class="col-form-label col-sm-1">R:</label>
-      <div class="col-sm-11">
-        <%= text_field_tag "red", nil, class: "form-control" %>
+
+    <% color_list = ["red", "green", "blue"] %>
+    <% color_list.each_with_index do |color, i| %>
+      <div class="form-group row <%= color%>-input">
+        <label for="" class="col-form-label col-sm-1"><%= color[0].upcase %>:</label>
+        <div class="col-sm-11 form-and-ticket">
+          <%= text_field_tag color, nil, class: "form-control color-input" %>
+          <div class="color-ticket <%= color %>-ticket"></div>
+        </div>
       </div>
-    </div>
-    <div class="form-group row">
-      <label for="" class="col-form-label col-sm-1">G:</label>
-      <div class="col-sm-11">
-        <%= text_field_tag "green", nil, class: "form-control" %>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="" class="col-form-label col-sm-1">B:</label>
-      <div class="col-sm-11">
-        <%= text_field_tag "blue", nil, class: "form-control" %>
-      </div>
-    </div>
+    <% end %>
+
     <p id="from-10-to-16" class="btn btn-primary">轉換</p>
   </div>
   <br>
@@ -52,9 +46,40 @@
 
   var RGB = ["red", "green", "blue"];
 
+  function define_rgb_string(rgb){
+    result = "rgb("+rgb["red"]+","+rgb["green"]+","+rgb["blue"]+")";
+    console.log(result);
+    return(result);
+  };
+
+  function print_color(color, rgb){
+    $("."+color+"-ticket").css("background-color", define_rgb_string(rgb));
+  }
+
+  function define_rgb(color, value){
+    var rgb_code = {
+      "red": 0,
+      "green": 0,
+      "blue": 0
+    };
+    rgb_code[color] = value;
+    print_color(color, rgb_code);
+  }
+
+  $(".color-input").on("change", function(){
+    var color = $(this).attr("id");
+    var value = $(this).val();
+
+    define_rgb(color, value);
+  });
+
+
   function count_10_to_16(number) {
     number = parseInt(number);
     hex = number.toString(16);
+    if (hex.length < 2) {
+      hex = "0"+hex;
+    }
     return(hex);
   };
 
@@ -98,8 +123,12 @@
       hex_string = hex.slice(i*2, i*2+2);
       console.log(color+": "+hex_string);
 
-      $("#"+color).val(convert_16_to_10(hex_string));
+      number = convert_16_to_10(hex_string);
+      define_rgb(color, number);
+      $("#"+color).val(number);
     }
   });
+
+
 
 </script>

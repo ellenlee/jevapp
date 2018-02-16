@@ -16,3 +16,15 @@
 nav {
   margin-bottom: 30px;
 }
+
+.form-and-ticket {
+  display: flex;
+}
+
+.color-ticket {
+  border: 1px solid #ccc;
+  width: 45px;
+  height: 100%;
+  margin-left: 12px;
+  border-radius: 4px;
+}
