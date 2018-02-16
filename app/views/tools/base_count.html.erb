@@ -34,7 +34,8 @@
     <h4>十六進位</h4>
     <%= text_field_tag "hex" %>
     <p></p>
-
+    <p id="from-16-to-10" class="btn btn-primary">轉換</p>
+    <hr>
     <div id="hex-result"></div>
   </div>
 </div>
@@ -48,56 +49,57 @@
 </style>
 
 <script type="text/javascript">
-  var convert = {
-    1: "1",
-    2: "2",
-    3: "3",
-    4: "4",
-    5: "5",
-    6: "6",
-    7: "7",
-    8: "8",
-    9: "9",
-    10: "A",
-    11: "B",
-    12: "C",
-    13: "D",
-    14: "E",
-    15: "F"
+
+  var RGB = ["red", "green", "blue"];
+
+  function count_10_to_16(number) {
+    number = parseInt(number);
+    hex = number.toString(16);
+    return(hex);
   };
 
+  function convert_16_to_10(hex){
+    return parseInt(hex, 16);
+  };
+
+  function show_color(hex){
+    $("#hex-result").css("background-color", "#"+hex);
+  };
+
+
   $("#from-10-to-16").on("click", function(){
-    var red_10 = $('#red').val();
-    var green_10 = $('#green').val();
-    var blue_10 = $('#blue').val();
+    console.log("from 10 to 16");
 
-    var red_16 = count_10_to_16(red_10);
-    var green_16 = count_10_to_16(green_10);
-    var blue_16 = count_10_to_16(blue_10);
+    result = new String();
 
-    var result = red_16+green_16+blue_16;
+    RGB.forEach(function(color){
+      console.log(color);
+      var number = $("#"+color).val();
+      var hex = count_10_to_16(number);
+      console.log(number+"-->"+hex);
+
+      result = result + hex;
+    });
+
     console.log(result);
 
     $("#hex").val(result);
-    $("#hex-result").css("background-color", "#"+result);
+    show_color(result);
   });
 
-  function count_10_to_16(number) {
-    console.log("convert "+number);
+  $('#from-16-to-10').on('click', function(){
+    console.log("from 16 to 10");
+    var hex = $("#hex").val();
+    show_color(hex);
 
-    if (number == 0) {
-      return("00");
-    } else if (number < 16){
-      return(number);
-    } else {
-      var first = Math.floor(number / 16);
-      var secound = number % 16;
-      var result = convert[first]+convert[secound];
-      console.log(result);
-      return(result);
+    for (i = 0; i <= 2; i++) {
+      color = RGB[i];
+
+      hex_string = hex.slice(i*2, i*2+2);
+      console.log(color+": "+hex_string);
+
+      $("#"+color).val(convert_16_to_10(hex_string));
     }
-
-  };
-
+  });
 
 </script>
