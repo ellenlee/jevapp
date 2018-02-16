@@ -1,7 +1,14 @@
 <h1>Profile</h1>
 
-<%= @user.name %>
-<%= @user.email %>
+<div class="flex">
+  <div class="col">
+    <%= image_tag(@user.avatar.small) if @user.avatar? %>
+  </div>
+  <div class="col">
+    <h4><%= @user.name %></h4>
+    <p><%= @user.email %></p>
+  </div>
+</div>
 
 <hr>
 <% if current_user == @user %>

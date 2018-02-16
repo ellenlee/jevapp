@@ -3,5 +3,7 @@
 <%= simple_form_for @user do |f| %>
   <%= f.input :name %>
   <%= f.input :email, disabled: true %>
+  <%= image_tag(@user.avatar.thumb) if @user.avatar? %>
+  <%= f.file_field :avatar, as: :file %>
   <%= f.button :submit, class: "btn btn-primary" %>
 <% end %>
