@@ -26,4 +26,9 @@ $(document).on("turbolinks:load", function(){
   var target_list = "list-"+page_id;
   console.log(target_list);
   $("#"+target_list).addClass("active");
+
+
+  $('.ckeditor').ckeditor({
+    // optional config
+  });
 });
